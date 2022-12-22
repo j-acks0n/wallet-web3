@@ -1,32 +1,72 @@
-import '../styles/globals.css';
-import '@rainbow-me/rainbowkit/styles.css';
-import type { AppProps } from 'next/app';
-import { RainbowKitProvider, getDefaultWallets } from '@rainbow-me/rainbowkit';
-import { configureChains, createClient, WagmiConfig } from 'wagmi';
-import { mainnet, polygon, optimism, arbitrum, goerli } from 'wagmi/chains';
-import { alchemyProvider } from 'wagmi/providers/alchemy';
-import { publicProvider } from 'wagmi/providers/public';
+import "../styles/globals.css";
+import "@rainbow-me/rainbowkit/styles.css";
+import type { AppProps } from "next/app";
+import { RainbowKitProvider, getDefaultWallets } from "@rainbow-me/rainbowkit";
+import { configureChains, createClient, WagmiConfig } from "wagmi";
+import {
+  mainnet,
+  goerli,
+  arbitrum,
+  arbitrumGoerli,
+  avalanche,
+  avalancheFuji,
+  bsc,
+  bscTestnet,
+  evmos,
+  evmosTestnet,
+  fantom,
+  fantomTestnet,
+  gnosis,
+  optimism,
+  optimismGoerli,
+  polygon,
+  polygonMumbai,
+  sepolia,
+  taraxa,
+  taraxaTestnet,
+  foundry,
+  hardhat,
+} from "wagmi/chains";
+import { alchemyProvider } from "wagmi/providers/alchemy";
+import { publicProvider } from "wagmi/providers/public";
 
 const { chains, provider, webSocketProvider } = configureChains(
   [
     mainnet,
-    polygon,
-    optimism,
+    goerli,
     arbitrum,
-    ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === 'true' ? [goerli] : []),
+    arbitrumGoerli,
+    avalanche,
+    avalancheFuji,
+    bsc,
+    bscTestnet,
+    evmos,
+    evmosTestnet,
+    fantom,
+    fantomTestnet,
+    gnosis,
+    optimism,
+    optimismGoerli,
+    polygon,
+    polygonMumbai,
+    sepolia,
+    taraxa,
+    taraxaTestnet,
+    foundry,
+    hardhat,
   ],
   [
     alchemyProvider({
       // This is Alchemy's default API key.
       // You can get your own at https://dashboard.alchemyapi.io
-      apiKey: '_gg7wSSi0KMBsdKnGVfHDueq6xMB9EkC',
+      apiKey: "PF4g87ollR-ky7kXtE8unBGiWyjPzBkm",
     }),
     publicProvider(),
   ]
 );
 
 const { connectors } = getDefaultWallets({
-  appName: 'RainbowKit App',
+  appName: "RainbowKit App",
   chains,
 });
 
