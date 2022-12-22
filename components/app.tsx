@@ -22,7 +22,7 @@ export const App = () => {
     mode: "recklesslyUnprepared",
     request: {
       to: address,
-      value: BigNumber.from("10"),
+      value: BigNumber.from("0"),
     },
   });
 
