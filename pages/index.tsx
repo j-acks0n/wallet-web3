@@ -1,11 +1,11 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import { App } from "../components";
-import styles from "../styles/Home.module.css";
+import type { NextPage } from 'next';
+import Head from 'next/head';
+import { Wallet } from '../components';
+import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
   return (
-    <div className={styles.container}>
+    <>
       <Head>
         <title>Web 3 Wallet</title>
         <meta
@@ -15,9 +15,9 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <App />
+        <Wallet />
       </main>
-    </div>
+    </>
   );
 };
 
