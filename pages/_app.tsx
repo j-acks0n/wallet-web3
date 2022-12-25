@@ -1,7 +1,10 @@
 import '../styles/globals.css';
 import '@rainbow-me/rainbowkit/styles.css';
 import type { AppProps } from 'next/app';
-import { RainbowKitProvider, getDefaultWallets } from '@rainbow-me/rainbowkit';
+import {
+  RainbowKitProvider,
+  connectorsForWallets,
+} from '@rainbow-me/rainbowkit';
 import { configureChains, createClient, WagmiConfig } from 'wagmi';
 import {
   mainnet,
@@ -29,6 +32,12 @@ import {
 } from 'wagmi/chains';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
+import {
+  coinbaseWallet,
+  injectedWallet,
+  metaMaskWallet,
+  walletConnectWallet,
+} from '@rainbow-me/rainbowkit/wallets';
 
 const { chains, provider, webSocketProvider } = configureChains(
   [
@@ -65,10 +74,17 @@ const { chains, provider, webSocketProvider } = configureChains(
   ]
 );
 
-const { connectors } = getDefaultWallets({
-  appName: 'RainbowKit App',
-  chains,
-});
+const connectors = connectorsForWallets([
+  {
+    groupName: 'Recommended',
+    wallets: [
+      injectedWallet({ chains }),
+      metaMaskWallet({ chains, shimDisconnect: true }),
+      coinbaseWallet({ chains, appName: 'Web 3 Wallet' }),
+      walletConnectWallet({ chains }),
+    ],
+  },
+]);
 
 const wagmiClient = createClient({
   autoConnect: true,
