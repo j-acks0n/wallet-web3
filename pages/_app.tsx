@@ -36,6 +36,7 @@ import {
   coinbaseWallet,
   injectedWallet,
   metaMaskWallet,
+  rainbowWallet,
   walletConnectWallet,
 } from '@rainbow-me/rainbowkit/wallets';
 
@@ -80,6 +81,7 @@ const connectors = connectorsForWallets([
     wallets: [
       injectedWallet({ chains }),
       metaMaskWallet({ chains, shimDisconnect: true }),
+      rainbowWallet({ chains }),
       coinbaseWallet({ chains, appName: 'Web 3 Wallet' }),
       walletConnectWallet({ chains }),
     ],
