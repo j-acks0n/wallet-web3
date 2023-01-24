@@ -3,6 +3,7 @@ import { Button } from './Button';
 import styles from '../styles/Wallet.module.css';
 import { Balance } from './Balance';
 import { UseWallet } from '../hooks';
+import { useEffect, useRef, useState } from 'react';
 
 export const Wallet = () => {
   const {
@@ -15,6 +16,16 @@ export const Wallet = () => {
     sendTransaction,
     disconnect,
   } = UseWallet();
+
+  const previousState = useRef<`0x${string}` | null>(null);
+
+  useEffect(() => {
+    // Execution 1 previous wallet is null and we want to set it to the current address
+    // From Execution 2 onwards, we want to save the current address as the previous
+    if (address) {
+      previousState.current = address;
+    }
+  }, [address]);
 
   return (
     <>
@@ -31,6 +42,12 @@ export const Wallet = () => {
             {showChainId && chain ? <div>Chain ID: {chain.id}</div> : null}
             {showBalance ? <Balance address={address} /> : null}
           </div>
+          {previousState ? (
+            <div>
+              <div>Previous wallet: {previousState.current}</div>
+              <div>Current wallet: {address}</div>
+            </div>
+          ) : null}
         </div>
       ) : null}
     </>
