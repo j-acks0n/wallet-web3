@@ -20,8 +20,6 @@ export const Wallet = () => {
   const previousState = useRef<`0x${string}` | null>(null);
 
   useEffect(() => {
-    // Execution 1 previous wallet is null and we want to set it to the current address
-    // From Execution 2 onwards, we want to save the current address as the previous
     if (address) {
       previousState.current = address;
     }
@@ -42,7 +40,7 @@ export const Wallet = () => {
             {showChainId && chain ? <div>Chain ID: {chain.id}</div> : null}
             {showBalance ? <Balance address={address} /> : null}
           </div>
-          {previousState ? (
+          {previousState.current ? (
             <div>
               <div>Previous wallet: {previousState.current}</div>
               <div>Current wallet: {address}</div>
